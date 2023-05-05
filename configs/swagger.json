@@ -1,0 +1,516 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "version": "1.0.0",
+      "title": "RongChoung"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+      "tags": [
+      {
+          "name": "Users"
+      },
+      {
+        "name": "Contents"
+    }
+  ],
+  "schemes": [
+      "http"
+  ],
+  "consumes": [
+      "application/json"
+  ],
+  "produces": [
+      "application/json"
+  ],
+  "paths": {
+      "/users": {
+          "post": {
+          "tags": [
+              "Users"
+          ],
+          "parameters": [
+              {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                  "$ref": "#/definitions/User"
+              }
+              }
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "responses": {
+              "200": {
+              "description": "New user is created",
+              "schema": {
+                  "$ref": "#/definitions/User"
+              }
+              }
+          }
+          },
+          "get": {
+          "tags": [
+              "Users"
+          ],
+          "summary": "Get all users in system",
+          "responses": {
+              "200": {
+              "description": "OK",
+              "schema": {
+                  "$ref": "#/definitions/User"
+              }
+              }
+          }
+          }
+      },
+      
+      "/users/{userId}": {
+          "parameters": [
+          {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "description": "ID of user that we want to find",
+              "type": "string"
+          }
+          ],
+          "get": {
+          "tags": [
+              "Users"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+              "200": {
+              "description": "User is found",
+              "schema": {
+                  "$ref": "#/definitions/User"
+              }
+              }
+          }
+          },
+          "delete": {
+          "summary": "Delete user with given ID",
+          "tags": [
+              "Users"
+          ],
+          "responses": {
+              "200": {
+              "description": "User is deleted",
+              "schema": {
+                  "$ref": "#/definitions/User"
+              }
+              }
+          }
+          },
+          "put": {
+          "summary": "Update user with give ID",
+          "tags": [
+              "Users"
+          ],
+          "parameters": [
+              {
+              "name": "post",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                  "$ref": "#/definitions/User"
+              }
+              }
+          ],
+          "responses": {
+              "200": {
+              "description": "User is updated",
+              "schema": {
+                  "$ref": "#/definitions/User"
+              }
+              }
+          }
+          }
+      },
+      "/contents": {
+        "post": {
+        "tags": [
+            "Contents"
+        ],
+        "parameters": [
+            {
+            "name": "content",
+            "in": "body",
+            "description": "Content that we want to create",
+            "schema": {
+                "$ref": "#/definitions/Content"
+            }
+            }
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "responses": {
+            "200": {
+            "description": "New content is created",
+            "schema": {
+                "$ref": "#/definitions/Content"
+            }
+            }
+        }
+        },
+        "get": {
+        "tags": [
+            "Contents"
+        ],
+        "summary": "Get all content in system",
+        "responses": {
+            "200": {
+            "description": "OK",
+            "schema": {
+                "$ref": "#/definitions/Content"
+            }
+            }
+        }
+        }
+    },
+    "/contents/{contentId}": {
+      "parameters": [
+      {
+          "name": "contentId",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+      }
+      ],
+      "get": {
+      "tags": [
+          "Contents"
+      ],
+      "summary": "Get content with given ID",
+      "responses": {
+          "200": {
+          "description": "Content is found",
+          "schema": {
+              "$ref": "#/definitions/Content"
+          }
+          }
+      }
+      },
+      "delete": {
+      "summary": "Delete content with given ID",
+      "tags": [
+          "Contents"
+      ],
+      "responses": {
+          "200": {
+          "description": "Content is deleted",
+          "schema": {
+              "$ref": "#/definitions/Content"
+          }
+          }
+      }
+      },
+      "put": {
+      "summary": "Update content with give ID",
+      "tags": [
+          "Contents"
+      ],
+      "parameters": [
+          {
+          "name": "post",
+          "in": "body",
+          "description": "Content with new values of properties",
+          "schema": {
+              "$ref": "#/definitions/Content"
+          }
+          }
+      ],
+      "responses": {
+          "200": {
+          "description": "Content is updated",
+          "schema": {
+              "$ref": "#/definitions/Content"
+          }
+          }
+      }
+      }
+  },
+
+
+  "/phonebook": {
+    "post": {
+    "tags": [
+        "PhoneBook"
+    ],
+    "description": "Create new phonebook in system",
+    "parameters": [
+        {
+        "name": "phonebook",
+        "in": "body",
+        "description": "PhoneBook that we want to create",
+        "schema": {
+            "$ref": "#/definitions/PhoneBook"
+        }
+        }
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "responses": {
+        "200": {
+        "description": "New PhoneBook is created",
+        "schema": {
+            "$ref": "#/definitions/PhoneBook"
+        }
+        }
+    }
+    }
+   
+},
+
+
+ "/phonebook/{byUserId}": {
+  "parameters": [
+  {
+      "name": "userId",
+      "in": "path",
+      "required": true,
+      "description": "ID of user that we want to find",
+      "type": "string"
+  }
+  ],
+  "get": {
+  "tags": [
+      "PhoneBook"
+  ],
+  "summary": "Get phone with given UserID",
+  "responses": {
+      "200": {
+      "description": "Phonbook is found",
+      "schema": {
+          "$ref": "#/definitions/PhoneBook"
+      }
+      }
+  }
+  }
+},
+
+
+"/sms": {
+  "post": {
+  "tags": [
+      "Sms"
+  ],
+  "description": "Add new sms in system",
+  "parameters": [
+      {
+      "name": "Sms",
+      "in": "body",
+      "description": "sms that we want to create",
+      "schema": {
+          "$ref": "#/definitions/Sms"
+      }
+      }
+  ],
+  "produces": [
+      "application/json"
+  ],
+  "responses": {
+      "200": {
+      "description": "New Sms is created",
+      "schema": {
+          "$ref": "#/definitions/Sms"
+      }
+      }
+  }
+  }
+ 
+}
+,
+
+
+"/image": {
+    "post": {
+    "tags": [
+        "Image"
+    ],
+    "description": "Add new image in system",
+    "parameters": [
+        {
+        "name": "Image",
+        "in": "body",
+        "description": "image that we want to create",
+        "schema": {
+            "$ref": "#/definitions/Image"
+        }
+        }
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "responses": {
+        "200": {
+        "description": "New image is created",
+        "schema": {
+            "$ref": "#/definitions/Image"
+        }
+        }
+    }
+    }
+   
+  },
+
+"/image/{userId}": {
+"parameters": [
+{
+    "name": "userId",
+    "in": "path",
+    "required": true,
+    "description": "ID of user that we want to find",
+    "type": "string"
+}
+],
+"get": {
+"tags": [
+    "Image"
+],
+"summary": "Get image with given ID",
+"responses": {
+    "200": {
+    "description": "image is found",
+    "schema": {
+        "$ref": "#/definitions/Image"
+    }
+    }
+}
+},
+"delete": {
+"summary": "Delete content with given ID",
+"tags": [
+    "Image"
+],
+"responses": {
+    "200": {
+    "description": "Image is deleted",
+    "schema": {
+        "$ref": "#/definitions/Image"
+    }
+    }
+}
+},
+"put": {
+"summary": "Update content with give ID",
+"tags": [
+    "Image"
+],
+"parameters": [
+    {
+    "name": "post",
+    "in": "body",
+    "description": "Content with new values of properties",
+    "schema": {
+        "$ref": "#/definitions/Image"
+    }
+    }
+],
+"responses": {
+    "200": {
+    "description": "Image is updated",
+    "schema": {
+        "$ref": "#/definitions/Image"
+    }
+    }
+}
+}
+}
+
+     },
+      "definitions": {
+    
+      "User": {
+          "required": [
+          "name",
+          "mobile"
+          ],
+          "properties": {
+          "name": {
+              "type": "string"
+          },
+          "mobile": {
+              "type": "string"
+          }
+          }
+      },
+      "Content": {
+        "required": [
+        "title",
+        "video"
+              ],
+        "properties": {
+        "title": {
+            "type": "string"
+        },
+        "video": {
+            "type": "string"
+        }
+        }
+    },
+    "PhoneBook": {
+      "required": [
+      "name",
+      "mobile",
+      "userId"
+            ],
+      "properties": {
+      "name": {
+          "type": "string"
+      },
+      "mobile": {
+          "type": "string"
+      },
+      
+      "userId": {
+          "type": "string"
+      }
+      }
+  },
+      
+  
+  "Image": {
+    "required": [
+    "image",
+    "userId"
+          ],
+    "properties": {
+    "image": {
+        "type": "string"
+    },
+    "userId": {
+        "type": "string"
+    }
+    }
+} ,
+
+
+"Sms": {
+  "required": [
+  "content",
+  "mobile",
+  "userId"
+        ],
+  "properties": {
+  "content": {
+      "type": "string"
+  },
+  
+  "mobile": {
+      "type": "string"
+  },
+  "userId": {
+      "type": "string"
+  }
+  
+  }
+} 
+  }
+}
