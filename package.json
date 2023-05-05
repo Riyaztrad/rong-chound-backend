@@ -2,11 +2,11 @@
   "name": "nodejs-restapi-mongo",
   "version": "1.0.0",
   "description": "Example Project on how to build and develop REST API with NodeJS and MongoDB",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "node ./index.js localhost 3081",
-    "start": "node ./index.js",
-    "server": "nodemon ./index.js",
+    "dev": "node ./server.js localhost 3081",
+    "start": "node ./server.js",
+    "server": "nodemon ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
