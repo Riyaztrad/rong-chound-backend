@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 require('dotenv').config()
 
 const taskController = require('./controller/task.controller')
@@ -8,7 +9,7 @@ const taskController = require('./controller/task.controller')
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/api/tasks', (req, res) => {
