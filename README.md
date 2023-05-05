@@ -1,9 +1,2 @@
-# nodejs-restapi
-Build scalable node.js rest api using express.js
-
-Start the app
-npm start
-
-http://localhost:3000/api-docs/
-
-<img src="./swagger-ui.png" />
+# nodejs-restapi-mongo
+Example Project on how to build and develop REST API with NodeJS and MongoDB

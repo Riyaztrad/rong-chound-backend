@@ -1,32 +1,39 @@
-var express =   require("express");
-const server = require('./configs/app')();
-const config = require('./configs/config/config');
-const db = require('./configs/db');
+const express = require('express');
+const bodyParser = require('body-parser');
+require('dotenv').config()
+
+const taskController = require('./controller/task.controller')
 
 
-var app         =   express();
 
-var multer  =   require('multer');
-var storage =   multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, './uploads');
-    },
-    filename: function (req, file, callback) {
-      callback(null, file.fieldname + '-' + Date.now());
-    }
-  });
-  var upload = multer({ storage : storage}).single('userPhoto');
-   
-  app.post('upload-avatar',function(req,res){
-      upload(req,res,function(err) {
-          if(err) {
-              return res.end("Error uploading file.");
-          }
-          res.end("File is uploaded");
-      });
-  });
-//create the basic server setup
-server.create(config, db);
+const app = express();
+const port = process.env.PORT || 3000;
 
-//start the server
-server.start();
+app.use(bodyParser.json());
+
+app.get('/api/tasks', (req, res) => {
+    taskController.getTasks().then(data => res.json(data));
+});
+
+app.post('/api/task', (req, res) => {
+    console.log(req.body);
+    taskController.createTask(req.body.task).then(data => res.json(data));
+});
+
+app.put('/api/task', (req, res) => {
+    taskController.updateTask(req.body.task).then(data => res.json(data));
+});
+
+app.delete('/api/task/:id', (req, res) => {
+    taskController.deleteTask(req.params.id).then(data => res.json(data));
+});
+
+app.get('/', (req, res) => {
+    res.send(`<h1>API Works !!!</h1>`)
+});
+
+
+
+app.listen(port, () => {
+    console.log(`Server listening on the port  ${port}`);
+})
