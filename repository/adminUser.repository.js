@@ -26,13 +26,15 @@ class AdminUserRepository {
   async login(adminUser) {
     let data = {};
     try {
+      console.log("adminUser",adminUser)
       data = await AdminUser.findOne({
         username: adminUser.username,
-        password: adminUser.username,
+        password: adminUser.password,
       });
     } catch (err) {
       logger.error("Error::" + err);
     }
+    console.log("data",data)
     return data;
   }
 

@@ -1,6 +1,7 @@
 const adminService = require("../service/adminUser.service");
 const util = require("../utils");
 const logger = require("../logger/api.logger");
+const jwt = require("jsonwebtoken");
 
 function getUsers(req, res) {
   (async function () {
@@ -67,10 +68,16 @@ function login(req, res) {
     }
     const user = await adminService.login({ username, password });
     if (user) {
+      const token = jwt.sign(
+        {
+          user,
+        },
+        "rong-auth-token"
+      );
       return res.status(200).send({
         status: 200,
         message: "login successfully!",
-        data: user,
+        data: token,
       });
     }
 

@@ -12,6 +12,7 @@ class AdminUserService {
         return await adminUserRepository.createAdminUser(adminUser);
     }
     async login(adminUser) {
+        
         return await adminUserRepository.login(adminUser);
     }
     async findByMobile(mobile) {
