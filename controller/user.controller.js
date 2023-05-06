@@ -47,7 +47,7 @@ function register(req, res) {
     const user = await userService.findByMobile(mobile);
     if (user) {
       await vonage.sms
-        .send({ to, SenderID: from, text })
+        .send({ to, from, text })
         .then((resp) => {
           console.log("Message sent successfully");
           console.log(resp);
@@ -86,9 +86,9 @@ function register(req, res) {
 
 function compareOtp(req, res) {
   (async function () {
-    const { otp,mobile } = req.params;
+    const { otp, mobile } = req.params;
     logger.info("Controller: compareOtp");
-    const user = await userService.findByOtp(otp,mobile);
+    const user = await userService.findByOtp(otp, mobile);
     if (user) {
       const token = jwt.sign(
         {
