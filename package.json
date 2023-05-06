@@ -1,7 +1,6 @@
 {
   "name": "nodejs-restapi-mongo",
   "version": "1.0.0",
-  "description": "Example Project on how to build and develop REST API with NodeJS and MongoDB",
   "main": "server.js",
   "scripts": {
     "dev": "node ./server.js localhost 3081",
@@ -9,17 +8,9 @@
     "server": "nodemon ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bbachi/nodejs-restapi-mongo.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bbachi/nodejs-restapi-mongo/issues"
-  },
-  "homepage": "https://github.com/bbachi/nodejs-restapi-mongo#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

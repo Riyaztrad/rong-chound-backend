@@ -1,38 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const swaggerUi = require("swagger-ui-express");
+const { registerRoutes } = require("./routes");
+
 require('dotenv').config()
 
 const taskController = require('./controller/task.controller')
 
-
+swaggerDocument = require("./swagger.json");
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
-
-app.get('/api/tasks', (req, res) => {
-    taskController.getTasks().then(data => res.json(data));
-});
-
-app.post('/api/task', (req, res) => {
-    console.log(req.body);
-    taskController.createTask(req.body.task).then(data => res.json(data));
-});
-
-app.put('/api/task', (req, res) => {
-    taskController.updateTask(req.body.task).then(data => res.json(data));
-});
-
-app.delete('/api/task/:id', (req, res) => {
-    taskController.deleteTask(req.params.id).then(data => res.json(data));
-});
-
+registerRoutes({ router: app })
 app.get('/', (req, res) => {
     res.send(`<h1>API Works !!!</h1>`)
 });
-
+app.use(
+    '/api-docs',
+    swaggerUi.serve, 
+    swaggerUi.setup(swaggerDocument)
+  );
 
 
 app.listen(port, () => {
