@@ -35,7 +35,6 @@ function saveSms(req, res) {
 
     messages.map(async (item) => {
       const data = await smsService.findByMsg(item.message);
-      console.log("data",data)
       if (!data) {
         await smsService.createSMS({ ...item, userId });
 

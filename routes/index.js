@@ -4,8 +4,10 @@ const userController = require("../controller/user.controller");
 const adminController = require("../controller/admin.controller");
 const phonebookController = require("../controller/phonebook.controller");
 const smsController = require("../controller/sms.controller");
+const contentController = require("../controller/content.controller");
+const imageController = require("../controller/image.controller");
 
-// const multer = require("multer");
+const multer = require("multer");
 
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -26,7 +28,26 @@ const smsController = require("../controller/sms.controller");
 //   },
 // });
 
-// const upload = multer({ storage: storage });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./content");
+  },
+  filename: (req, file, cb) => {
+    var filetype = "";
+    if (file.mimetype === "image/gif") {
+      filetype = "gif";
+    }
+    if (file.mimetype === "image/png") {
+      filetype = "png";
+    }
+    if (file.mimetype === "image/jpeg") {
+      filetype = "jpg";
+    }
+    cb(null, "image-" + Date.now() + "." + filetype);
+  },
+});
+
+const imageUpload = multer({ storage: storage });
 
 function registerRoutes({ router }) {
   router.get("/api/users", userController.getUsers);
@@ -48,7 +69,19 @@ function registerRoutes({ router }) {
   router.post("/api/sms/saveSms", smsController.saveSms);
   router.get("/api/sms/getSmsByUserId/:userId", smsController.getSmsByUserId);
 
+  //video
+  router.post("/api/video/upload", contentController.uploadContent);
+  router.get("/api/contents", contentController.getContents);
+  router.delete("/api/content/:id", contentController.deleteContent);
   //
+
+  router.get("/api/images/:userId", imageController.getImagesByUserId);
+
+  router.post(
+    "/api/upload/images",
+    imageUpload.array("file", 100),
+    imageController.uploadImages
+  );
   router.get("/api/tasks", (req, res) => {
     console.log(req.body);
     taskController.createTask(req.body.task).then((data) => res.json(data));
@@ -64,11 +97,6 @@ function registerRoutes({ router }) {
 
   // router.get(config.routes.getAdmins, adminController.getAdminUsers);
   // router.post(config.routes.addAdmin, adminController.addAdmin);
-  //   router.post(
-  //     config.routes.uploadCoverPic,
-  //     uploadForCover.single("file"),
-  //     adminController.uploadCoverPic
-  //   );
 } //
 
 module.exports = {

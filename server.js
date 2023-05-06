@@ -6,7 +6,6 @@ const { registerRoutes } = require("./routes");
 
 require('dotenv').config()
 
-const taskController = require('./controller/task.controller')
 
 swaggerDocument = require("./swagger.json");
 
@@ -14,6 +13,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static('public'));
+app.use('/content', express.static('content'));
 registerRoutes({ router: app })
 app.get('/', (req, res) => {
     res.send(`<h1>API Works !!!</h1>`)

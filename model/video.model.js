@@ -1,18 +1,17 @@
 const mongoose = require("mongoose");
 
-const imageSchema = new mongoose.Schema(
+const videoSchema = new mongoose.Schema(
   {
+    title: "string",
     url: "string",
-    originalname: "string",
-    userId: "string",
     created_at: "date",
     updated_at: "date",
   },
   { timestamps: { createDate: "created_at", updatedDate: "updated_at" } }
 );
 
-const Image = mongoose.model("images", imageSchema);
+const Video = mongoose.model("contents", videoSchema);
 
 module.exports = {
-  Image,
+  Video,
 };
