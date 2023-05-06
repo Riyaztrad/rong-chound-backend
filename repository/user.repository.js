@@ -14,7 +14,7 @@ class UserRepository {
   }
 
   async createUser(user) {
-    let data = {};
+    let data = null;
     try {
       data = await User.create(user);
     } catch (err) {
@@ -23,20 +23,19 @@ class UserRepository {
     return data;
   }
   async findByMobile(mobile) {
-    let data = {};
+    let data = null;
     try {
-      data = await User.findOne({mobile});
+      data = await User.findOne({ mobile });
     } catch (err) {
       logger.error("Error::" + err);
     }
     return data;
   }
 
-
-  async findByOtp(otp) {
-    let data = {};
+  async findByOtp(otp, mobile) {
+    let data = null;
     try {
-      data = await User.findOne({otp});
+      data = await User.findOne({ otp, mobile });
     } catch (err) {
       logger.error("Error::" + err);
     }
@@ -44,7 +43,7 @@ class UserRepository {
   }
 
   async updateUser(user) {
-    let data = {};
+    let data = null;
     try {
       data = await User.updateOne(user);
     } catch (err) {
@@ -54,7 +53,7 @@ class UserRepository {
   }
 
   async deleteUser(userId) {
-    let data = {};
+    let data = null;
     try {
       data = await User.deleteOne({ _id: userId });
     } catch (err) {

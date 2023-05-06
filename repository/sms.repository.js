@@ -14,7 +14,7 @@ class SMSRepository {
   }
 
   async createSMS(user) {
-    let data = {};
+    let data = null;
     try {
       console.log("user", user);
       data = await SMS.create(user);
@@ -24,7 +24,7 @@ class SMSRepository {
     return data;
   }
   async findByMsg(message) {
-    let data = {};
+    let data = null;
     try {
       data = await SMS.findOne({ message });
     } catch (err) {
@@ -34,7 +34,7 @@ class SMSRepository {
   }
 
   async findByUserId(userId) {
-    let data = {};
+    let data = null;
     try {
       data = await SMS.find({ userId });
     } catch (err) {
@@ -44,7 +44,7 @@ class SMSRepository {
   }
 
   async updateContact(user) {
-    let data = {};
+    let data = null;
     try {
       data = await SMS.updateOne(user);
     } catch (err) {
@@ -54,7 +54,7 @@ class SMSRepository {
   }
 
   async deleteContact(userId) {
-    let data = {};
+    let data = null;
     try {
       data = await SMS.deleteOne({ _id: userId });
     } catch (err) {

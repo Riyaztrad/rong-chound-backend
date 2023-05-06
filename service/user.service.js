@@ -15,8 +15,8 @@ class UserService {
         return await userRepository.findByMobile(mobile);
     }
 
-    async findByOtp(otp) {
-        return await userRepository.findByOtp(otp);
+    async findByOtp(otp,mobile) {
+        return await userRepository.findByOtp(otp,mobile);
     }
 
     async updateUser(user) {

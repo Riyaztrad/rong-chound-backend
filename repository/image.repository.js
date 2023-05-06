@@ -14,7 +14,7 @@ class ImageRepository {
   }
 
   async createImage(video) {
-    let data = {};
+    let data = null;
     try {
       console.log("users:::", video);
       data = await Image.create(video);
@@ -25,7 +25,7 @@ class ImageRepository {
   }
 
   async getImageByImageName(fileName) {
-    let data = {};
+    let data = null;
     try {
       console.log("users:::", fileName);
       data = await Image.findOne({ originalname: fileName });

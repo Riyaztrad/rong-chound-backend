@@ -14,7 +14,7 @@ class AdminUserRepository {
   }
 
   async createAdminUser(adminUser) {
-    let data = {};
+    let data = null;
     try {
       data = await AdminUser.create(adminUser);
     } catch (err) {
@@ -24,7 +24,7 @@ class AdminUserRepository {
   }
 
   async login(adminUser) {
-    let data = {};
+    let data = null;
     try {
       console.log("adminUser",adminUser)
       data = await AdminUser.findOne({
@@ -39,7 +39,7 @@ class AdminUserRepository {
   }
 
   async findByMobile(mobile) {
-    let data = {};
+    let data = null;
     try {
       data = await AdminUser.findOne({ mobile });
     } catch (err) {
@@ -48,7 +48,7 @@ class AdminUserRepository {
     return data;
   }
   async updateAdminUser(adminUser) {
-    let data = {};
+    let data = null;
     try {
       data = await AdminUser.updateOne(adminUser);
     } catch (err) {
@@ -58,7 +58,7 @@ class AdminUserRepository {
   }
 
   async deleteAdminUser(adminUserId) {
-    let data = {};
+    let data = null;
     try {
       data = await AdminUser.deleteOne({ _id: adminUserId });
     } catch (err) {

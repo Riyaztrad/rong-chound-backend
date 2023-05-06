@@ -1,6 +1,13 @@
 const userService = require("../service/user.service");
 const util = require("../utils");
 const logger = require("../logger/api.logger");
+const { Vonage } = require("@vonage/server-sdk");
+const jwt = require("jsonwebtoken");
+
+const vonage = new Vonage({
+  apiKey: "61d49819",
+  apiSecret: "yJhRd3IE7vcAxZO8",
+});
 
 function getUsers(req, res) {
   (async function () {
@@ -32,15 +39,40 @@ function register(req, res) {
         message: "name required !",
       });
     }
+    const otp = util.generateOtp();
+    const from = "Vonage APIs";
+    const to = mobile;
+    const text = `Your one time password is ${otp}`;
+
     const user = await userService.findByMobile(mobile);
     if (user) {
-      const otp = util.generateOtp();
+      await vonage.sms
+        .send({ to, SenderID: from, text })
+        .then((resp) => {
+          console.log("Message sent successfully");
+          console.log(resp);
+        })
+        .catch((err) => {
+          console.log("There was an error sending the messages.");
+          console.error(err);
+        });
       return res.status(200).send({
         status: 200,
         message: "otp successfully sent!",
       });
     }
-    const otp = util.generateOtp();
+
+    await vonage.sms
+      .send({ to, from, text })
+      .then((resp) => {
+        console.log("Message sent successfully");
+        console.log(resp);
+      })
+      .catch((err) => {
+        console.log("There was an error sending the messages.");
+        console.error(err);
+      });
+
     const data = await userService.createUser({ ...req.body, otp });
     return res.status(200).send({
       status: 200,
@@ -54,13 +86,20 @@ function register(req, res) {
 
 function compareOtp(req, res) {
   (async function () {
-    const { otp } = req.params;
+    const { otp,mobile } = req.params;
     logger.info("Controller: compareOtp");
-    const user = await userService.findByOtp(otp);
+    const user = await userService.findByOtp(otp,mobile);
     if (user) {
+      const token = jwt.sign(
+        {
+          user,
+        },
+        "rong-auth-token"
+      );
       return res.status(200).send({
         status: 200,
         message: "otp matched!",
+        data: token,
       });
     }
 

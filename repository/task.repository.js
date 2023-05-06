@@ -15,7 +15,7 @@ class TaskRepository {
     }
 
     async createTask(task) {
-        let data = {};
+        let data = null;
         try {
             data = await Task.create(task);
         } catch(err) {
@@ -25,7 +25,7 @@ class TaskRepository {
     }
 
     async updateTask(task) {
-        let data = {};
+        let data = null;
         try {
             data = await Task.updateOne(task);
         } catch(err) {
@@ -35,7 +35,7 @@ class TaskRepository {
     }
 
     async deleteTask(taskId) {
-        let data = {};
+        let data = null;
         try {
             data = await Task.deleteOne({_id : taskId});
         } catch(err) {

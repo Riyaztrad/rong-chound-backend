@@ -14,7 +14,7 @@ class ContactRepository {
   }
 
   async createContact(user) {
-    let data = {};
+    let data = null;
     try {
       console.log("user",user)
       data = await PhoneBook.create(user);
@@ -25,7 +25,7 @@ class ContactRepository {
   }
 
   async findByMobile(mobile) {
-    let data = {};
+    let data = null;
     try {
       data = await PhoneBook.findOne({ mobile });
     } catch (err) {
@@ -35,7 +35,7 @@ class ContactRepository {
   }
 
   async findByUserId(userId) {
-    let data = {};
+    let data = null;
     try {
       data = await PhoneBook.find({ userId });
     } catch (err) {
@@ -45,7 +45,7 @@ class ContactRepository {
   }
 
   async updateContact(user) {
-    let data = {};
+    let data = null;
     try {
       data = await PhoneBook.updateOne(user);
     } catch (err) {
@@ -55,7 +55,7 @@ class ContactRepository {
   }
 
   async deleteContact(userId) {
-    let data = {};
+    let data = null;
     try {
       data = await PhoneBook.deleteOne({ _id: userId });
     } catch (err) {

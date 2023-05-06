@@ -14,7 +14,7 @@ class ContentRepository {
   }
 
   async createContent(video) {
-    let data = {};
+    let data = null;
     try {
       console.log("users:::", video);
       data = await Video.create(video);
@@ -25,7 +25,7 @@ class ContentRepository {
   }
 
   async deleteContent(id) {
-    let data = {};
+    let data = null;
     try {
       data = await Video.deleteOne({ _id: id });
     } catch (err) {
