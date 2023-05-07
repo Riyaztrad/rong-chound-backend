@@ -56,6 +56,9 @@ function register(req, res) {
           console.log("There was an error sending the messages.");
           console.error(err);
         });
+
+      await userService.updateUser({ ...user, otp });
+
       return res.status(200).send({
         status: 200,
         message: "otp successfully sent!",
@@ -87,7 +90,7 @@ function register(req, res) {
 function compareOtp(req, res) {
   (async function () {
     const { otp, mobile } = req.params;
-    logger.info("Controller: compareOtp");
+    logger.info("Controller: compareOtp", req.params);
     const user = await userService.findByOtp(otp, mobile);
     if (user) {
       const token = jwt.sign(
