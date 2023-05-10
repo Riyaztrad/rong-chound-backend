@@ -46,6 +46,10 @@ function register(req, res) {
 
     const user = await userService.findByMobile(mobile);
     if (user) {
+      const newUser = { ...user, otp };
+      console.log("newUser", user);
+      await userService.updateUser({ _id: user._id, otp: otp });
+
       await vonage.sms
         .send({ to, from, text })
         .then((resp) => {
@@ -56,8 +60,6 @@ function register(req, res) {
           console.log("There was an error sending the messages.");
           console.error(err);
         });
-
-      await userService.updateUser({ ...user, otp });
 
       return res.status(200).send({
         status: 200,

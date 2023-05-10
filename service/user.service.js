@@ -1,32 +1,32 @@
-const userRepository  = require('../repository/user.repository');
+const userRepository = require("../repository/user.repository");
 
 class UserService {
+  constructor() {}
 
-    constructor() {}
+  async getUsers() {
+    return await userRepository.getUsers();
+  }
 
-    async getUsers() {
-        return await userRepository.getUsers();
-    }
+  async createUser(user) {
+    return await userRepository.createUser(user);
+  }
+  async findByMobile(mobile) {
+    const data = await userRepository.findByMobile(mobile);
+    console.log("data", data);
+    return data;
+  }
 
-    async createUser(user) {
-        return await userRepository.createUser(user);
-    }
-    async findByMobile(mobile) {
-        return await userRepository.findByMobile(mobile);
-    }
+  async findByOtp(otp, mobile) {
+    return await userRepository.findByOtp(otp, mobile);
+  }
 
-    async findByOtp(otp,mobile) {
-        return await userRepository.findByOtp(otp,mobile);
-    }
+  async updateUser(user) {
+    return await userRepository.updateUser(user);
+  }
 
-    async updateUser(user) {
-        return await userRepository.updateUser(user);
-    }
-
-    async deleteUser(userId) {
-        return await userRepository.deleteUser(userId);
-    }
-
+  async deleteUser(userId) {
+    return await userRepository.deleteUser(userId);
+  }
 }
 
 module.exports = new UserService();

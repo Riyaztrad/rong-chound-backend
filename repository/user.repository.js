@@ -26,6 +26,7 @@ class UserRepository {
     let data = null;
     try {
       data = await User.findOne({ mobile });
+     
     } catch (err) {
       logger.error("Error::" + err);
     }
