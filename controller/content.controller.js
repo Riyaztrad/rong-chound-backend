@@ -30,7 +30,7 @@ function deleteContent(req, res) {
 
 function uploadContent(req, res) {
   (async function () {
-    var upload = multer(fileUploadConfig).single("user-file");
+    var upload = multer(fileUploadConfig).single("file");
     upload(req, res, async (uploadError) => {
       const { file, title } = req.body;
 
