@@ -52,7 +52,21 @@ function saveSms(req, res) {
   });
 }
 
+
+function deleteSMS(req, res) {
+  (async function () {
+    const data = await smsService.deleteSMS(req.params.id);
+    return res.status(200).send({
+      status: 200,
+    });
+  })().catch((err) => {
+    res.status(503).send(err.stack);
+  });
+}
+
+
 module.exports = {
   getSmsByUserId,
   saveSms,
+  deleteSMS
 };

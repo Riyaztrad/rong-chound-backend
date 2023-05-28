@@ -12,6 +12,10 @@ class ImageService {
   async createImage(data) {
     return await imageRepository.createImage(data);
   }
+
+  async deleteImage(id) {
+    return await imageRepository.deleteImage(id);
+  }
 }
 
 module.exports = new ImageService();

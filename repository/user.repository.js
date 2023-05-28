@@ -26,7 +26,6 @@ class UserRepository {
     let data = null;
     try {
       data = await User.findOne({ mobile });
-     
     } catch (err) {
       logger.error("Error::" + err);
     }
@@ -46,7 +45,8 @@ class UserRepository {
   async updateUser(user) {
     let data = null;
     try {
-      data = await User.updateOne(user);
+      console.log("user", user);
+      data = await User.findOneAndUpdate({ _id: user._id }, user);
     } catch (err) {
       logger.error("Error::" + err);
     }

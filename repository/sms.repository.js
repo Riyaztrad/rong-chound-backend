@@ -53,10 +53,10 @@ class SMSRepository {
     return data;
   }
 
-  async deleteContact(userId) {
+  async deleteSMS(id) {
     let data = null;
     try {
-      data = await SMS.deleteOne({ _id: userId });
+      data = await SMS.deleteOne({ _id: id });
     } catch (err) {
       logger.error("Error::" + err);
     }

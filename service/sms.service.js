@@ -1,4 +1,3 @@
-
 const smsRepository = require("../repository/sms.repository");
 
 class UserService {
@@ -15,7 +14,10 @@ class UserService {
   async findByMsg(data) {
     return await smsRepository.findByMsg(data);
   }
+
+  async deleteSMS(data) {
+    return await smsRepository.deleteSMS(data);
+  }
 }
 
 module.exports = new UserService();
-

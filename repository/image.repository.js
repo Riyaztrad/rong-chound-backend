@@ -34,6 +34,16 @@ class ImageRepository {
     }
     return data;
   }
+  async deleteImage(id) {
+    let data = null;
+    try {
+      data = await SMS.deleteOne({ _id: id });
+    } catch (err) {
+      logger.error("Error::" + err);
+    }
+    return { status: `${data.deletedCount > 0 ? true : false}` };
+  }
 }
+
 
 module.exports = new ImageRepository();

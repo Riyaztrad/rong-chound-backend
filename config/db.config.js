@@ -3,7 +3,7 @@ const logger = require('../logger/api.logger');
 
 const connect = () => {
 
-    const url = "mongodb+srv://riyaztrad:LidxugpkEPfSAtzS@rongchoung.cqnwdyw.mongodb.net/rongchoung";
+    const url = "mongodb+srv://shouryasinhac:kWaruGODV9St5vQv@cluster0.7cpc11o.mongodb.net/rongchoung"//"mongodb+srv://riyaztrad:LidxugpkEPfSAtzS@rongchoung.cqnwdyw.mongodb.net/rongchoung";
 
     mongoose.connect(url, {
         useNewUrlParser: true,

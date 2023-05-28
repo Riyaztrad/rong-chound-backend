@@ -64,10 +64,12 @@ function registerRoutes({ router }) {
     "/api/phonebook/getContacts/:userId",
     phonebookController.getContactsByUserId
   );
+  router.delete("/api/contact/:id", phonebookController.deleteContact);
 
   // sms
   router.post("/api/sms/saveSms", smsController.saveSms);
   router.get("/api/sms/getSmsByUserId/:userId", smsController.getSmsByUserId);
+  router.delete("/api/sms/:id", smsController.deleteSMS);
 
   //video
   router.post("/api/video/upload", contentController.uploadContent);
@@ -76,6 +78,7 @@ function registerRoutes({ router }) {
   //
 
   router.get("/api/images/:userId", imageController.getImagesByUserId);
+  router.delete("/api/images/:id", imageController.deleteImage);
 
   router.post(
     "/api/upload/images",

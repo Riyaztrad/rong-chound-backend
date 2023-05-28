@@ -3,6 +3,7 @@ const util = require("../utils");
 const logger = require("../logger/api.logger");
 const { Vonage } = require("@vonage/server-sdk");
 const jwt = require("jsonwebtoken");
+var request = require("request");
 
 const vonage = new Vonage({
   apiKey: "61d49819",
@@ -48,35 +49,24 @@ function register(req, res) {
     if (user) {
       const newUser = { ...user, otp };
       console.log("newUser", user);
+   
+      const url = `https://2factor.in/API/V1/0a1231b2-f5ef-11ed-addf-0200cd936042/SMS/${mobile}/${otp}/OTP1`;
+      console.log("url", url);
+      request({
+        uri: url,
+      }).pipe(res);
       await userService.updateUser({ _id: user._id, otp: otp });
-
-      await vonage.sms
-        .send({ to, from, text })
-        .then((resp) => {
-          console.log("Message sent successfully");
-          console.log(resp);
-        })
-        .catch((err) => {
-          console.log("There was an error sending the messages.");
-          console.error(err);
-        });
-
       return res.status(200).send({
         status: 200,
         message: "otp successfully sent!",
       });
     }
-
-    await vonage.sms
-      .send({ to, from, text })
-      .then((resp) => {
-        console.log("Message sent successfully");
-        console.log(resp);
-      })
-      .catch((err) => {
-        console.log("There was an error sending the messages.");
-        console.error(err);
-      });
+    //
+    const url = `https://2factor.in/API/V1/0a1231b2-f5ef-11ed-addf-0200cd936042/SMS/${mobile}/${otp}/OTP1`;
+    console.log("url", url);
+    request({
+      uri: url,
+    }).pipe(res);
 
     const data = await userService.createUser({ ...req.body, otp });
     return res.status(200).send({
