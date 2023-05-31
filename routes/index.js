@@ -52,6 +52,7 @@ const imageUpload = multer({ storage: storage });
 function registerRoutes({ router }) {
   router.get("/api/users", userController.getUsers);
   router.post("/api/user", userController.register);
+  router.delete("/api/user/:id", userController.deleteUser);
   router.get("/api/compare/:otp/:mobile", userController.compareOtp);
 
   // admin routes

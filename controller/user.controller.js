@@ -107,8 +107,20 @@ function compareOtp(req, res) {
   });
 }
 
+function deleteUser(req, res) {
+  (async function () {
+    const data = await userService.deleteUser(req.params.id);
+    return res.status(200).send({
+      status: 200,
+    });
+  })().catch((err) => {
+    res.status(503).send(err.stack);
+  });
+}
+
 module.exports = {
   getUsers,
   register,
   compareOtp,
+  deleteUser
 };
