@@ -28,6 +28,7 @@ function register(req, res) {
   (async function () {
     const { mobile, name } = req.body;
     logger.info("Controller: register");
+    
     if (!mobile) {
       return res.status(400).send({
         status: 400,

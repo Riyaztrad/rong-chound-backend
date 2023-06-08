@@ -34,7 +34,7 @@ function uploadImages(req, res) {
     return res.status(200).send({
       status: 200,
       message: "uploaded successfully !",
-      data: req.files,
+      // data: req.files,
     });
   })().catch((err) => {
     res.status(503).send(err.stack);
